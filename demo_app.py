@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+
+# ТАК А Я МОГУ КОМИТНУТЬ ЭТО?
 # streamlit run demo_app.py
 with st.echo(code_location='below'):
     st.title("Демография и кое-что ещё")
@@ -23,6 +25,8 @@ with st.echo(code_location='below'):
     plt.plot(df.groupby('year')['urbanization'].mean())
     plt.title("Средний уровень урбанизации")
     st.pyplot(fig)
+
+
 
 
 
