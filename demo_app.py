@@ -26,7 +26,7 @@ with st.echo(code_location='below'):
     plt.title("Средний уровень урбанизации")
     st.pyplot(fig)
 
-
+# wkvlbjasdkv
 
 
 
