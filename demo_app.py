@@ -2,6 +2,8 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
 import plotly.express as px
+import seaborn as sns
+import altair as alt
 from regions import regions_ru
 
 
@@ -69,6 +71,58 @@ with st.echo(code_location='below'):
         """
         **Выберите хотя бы один регион**
         """
+    """
+    
+    ### **Посмотрим как изменялся "ящик с усами"**
+    """
+    need_year = st.slider('Выберите год:', min_value=1990, max_value=2017)
+
+    df1 = df[df['year'] == need_year]
+    df1 = df1.drop(['year', 'region', 'urbanization', 'gdw', 'npg'], axis=1)
+
+    fig = plt.figure()
+    ax = sns.boxplot(data=df1, orient="h", palette="Set1")
+    st.pyplot(fig)
+    """
+    ## **Что мы имеем на 2017 год**
+    """
+    ans = st.radio('Выберите:', ['Смертность', 'Рождаемость', 'Естественный прирост'])
+    df3 = df[df['year'] == 2017]
+    df3 = df3.sort_values('death_rate', ascending=False)
+    source = df3
+    fig1 = alt.Chart(source).mark_bar(opacity=1, height=7, color='darkmagenta').encode(
+        x='death_rate:Q',
+        y=alt.Y('region:N', sort='-x', title='Регионы')
+    ).properties(
+        width=700,
+        height=900,
+    )
+    fig2 = alt.Chart(source).mark_bar(opacity=1, height=7, color='blue').encode(
+        x='birth_rate:Q',
+        y=alt.Y('region:N', sort='-x', title='Регионы')
+    ).properties(
+        width=700,
+        height=900,
+    )
+    # color='green'
+    fig3 = alt.Chart(source).mark_bar(opacity=1, height=7).encode(
+        x='npg:Q',
+        y=alt.Y('region:N', sort='-x', title='Регионы'),
+        color = alt.condition(
+            alt.datum.npg > 0,
+            alt.value("darkgreen"),  # The positive color
+            alt.value("crimson")
+        )
+    ).properties(
+        width=700,
+        height=900,
+    )
+    if ans == 'Смертность':
+        st.altair_chart(fig1)
+    elif ans == 'Рождаемость':
+        st.altair_chart(fig2)
+    elif ans == 'Естественный прирост':
+        st.altair_chart(fig3)
     balloons = st.button('👍')
     if balloons:
         st.balloons()
