@@ -6,7 +6,6 @@ import seaborn as sns
 
 # ТАК А Я МОГУ КОМИТНУТЬ ЭТО?
 # streamlit run demo_app.py
-# streamlit run demo_app.py
 with st.echo(code_location='below'):
     st.title("Демография и кое-что ещё")
     """
