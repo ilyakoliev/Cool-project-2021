@@ -1,4 +1,4 @@
-regions_ru  = {'Алтайский край':'Altai Krai',
+regions_ru = {'Алтайский край':'Altai Krai',
  'Республика Алтай':'Altai Republic',
  'Амурская область':'Amur Oblast',
  'Архангельская область':'Arkhangelsk Oblast',
